@@ -1,16 +1,31 @@
 class animals:
 
-    def __init__(self, fed, weight):
+    def __init__(self, name, fed, weight):
+        self.name = name
         self.weight = weight
         self.fed = fed
+        weight_dict = {}
+
+    def weight_(self, weight_dict=None):
+        for key, value in weight_dict:
+            key = self.name
+            value = self.weight
+
+    def compare_weight(self, other):
+        total_weight = int(self.weight) + int(other.weight)
+        print('Общий вес животных:', total_weight)
+        if self.weight > other.weight:
+            print('Больший вес у:', self.name)
+        else:
+            print('Больший вес у:', other.name)
+        return total_weight
 
 
 class birds(animals):
     def __init__(self, name, fed, weight, eggs):
-        super().__init__(fed, weight)
+        super().__init__(name, fed, weight)
         self.fed = fed
         self.eggs = eggs
-        self.name = name
 
 
 class gooses(birds):
@@ -69,6 +84,9 @@ chicken2 = chicken("Кукареку", "покормили", 0.8, 7)
 chicken2.data()
 chicken2.say_word()
 chicken2.collected_eggs()
+chickens = chicken1 and chicken2
+chickens.compare_weight(grey)
+print("----------------------------------------------------------------------")
 
 
 class ducks(birds):
@@ -93,11 +111,11 @@ duck = ducks("'Кряква'", "покормили", 1, 3)
 duck.data()
 duck.say_word()
 duck.collected_eggs()
-
+print("----------------------------------------------------------------------")
 
 class mimmals(animals):
     def __init__(self, name, fed, weight):
-        super().__init__(fed, weight)
+        super().__init__(name, fed, weight)
         self.fed = fed
         self.name = name
 
@@ -150,28 +168,46 @@ class goat(cow_and_goat):
         print(word)
 
 
-goat_roga = goat("Рога", "покормили", 70, 6)
-goat_roga.data_goat()
-goat_roga.say_word()
-goat_roga.get_milk_goat()
-
-goat_koputa = goat("Копыта", "покормили", 60, 4)
-goat_koputa.data_goat()
-goat_koputa.say_word()
-goat_koputa.get_milk_goat()
+goat_horn = goat("Рога", "покормили", 70, 6)
+goat_horn.data_goat()
+goat_horn.say_word()
+goat_horn.get_milk_goat()
 
 
-class maximum(goat, cow, ducks, chicken, gooses):
-    def __init__(self, weight):
-        super().__init__(weight)
-
-    def max_weight(self):
-        args = self.weight
-        for kg in args:
-            if kg > args:
-                print(kg)
-        return kg
+goat_hoof = goat("Копыта", "покормили", 60, 4)
+goat_hoof.data_goat()
+goat_hoof.say_word()
+goat_hoof.get_milk_goat()
+goat_horn.compare_weight(goat_hoof)
+print("----------------------------------------------------------------------")
 
 
-max_w = maximum()
-max_w.max_weight()
+class sheep(mimmals):
+    def __init__(self, name, fed, weight, woof):
+        super().__init__(name, fed, weight)
+        self.woof = woof
+
+    def data_sheep(self):
+        description = ("Овца - " + self.name + " весит: " + str(self.weight) + " кг " + "и его " + self.fed)
+        print(description)
+
+    def get_woof_sheep(self):
+        milk_1 = ("Собранное шерсти с " + " овцы " + self.name + " : " + str(self.woof) + " литров")
+        print(milk_1)
+
+    def say_word(self):
+        word = "Ме-е-е"
+        print(word)
+
+
+sheep_sheepy = sheep("Барашек", "покормили", 30, 1)
+sheep_sheepy.data_sheep()
+sheep_sheepy.get_woof_sheep()
+sheep_sheepy.say_word()
+
+sheep_waivy = sheep("Кудрявый", "покормили", 50, 1.5)
+sheep_waivy.data_sheep()
+sheep_waivy.get_woof_sheep()
+sheep_waivy.say_word()
+sheep_sheepy.compare_weight(sheep_waivy)
+

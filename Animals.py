@@ -1,15 +1,17 @@
 class animals:
 
-    def __init__(self, name, fed, weight):
+    def __init__(self, name, fed, weight, word):
         self.name = name
         self.weight = weight
         self.fed = fed
         weight_dict = {}
+        self.word = word
 
     def weight_(self, weight_dict=None):
         for key, value in weight_dict:
             key = self.name
             value = self.weight
+            weight_dict[key] = value
 
     def compare_weight(self, other):
         total_weight = int(self.weight) + int(other.weight)
@@ -20,30 +22,32 @@ class animals:
             print('Больший вес у:', other.name)
         return total_weight
 
+    def say_word(self):
+        print(self.word)
+
 
 class birds(animals):
-    def __init__(self, name, fed, weight, eggs):
-        super().__init__(name, fed, weight)
+    def __init__(self, name, fed, weight, eggs, word):
+        super().__init__(name, fed, weight, word)
         self.fed = fed
         self.eggs = eggs
+
+    def data(self):
+        description = (self.name + " весит: " + str(self.weight) + " кг " + "и его " + self.fed)
+        print(description)
+
+    def collected_eggs(self):
+        eggs1 = ("Собранные яйца с: " + self.name + " : " + str(self.eggs))
+        print(eggs1)
+
+
+print("----------------------------------------------------------------------")
 
 
 class gooses(birds):
 
-    def __init__(self, name, fed, weight, eggs):
-        super().__init__(name, fed, weight, eggs)
-
-    def data(self):
-        description = ("Гусь - " + self.name + " весит: " + str(self.weight) + " кг " + "и его " + self.fed)
-        print(description)
-
-    def collected_eggs(self):
-        eggs1 = ("Собранные яйца с: " + " гуся " + self.name + " : " + str(self.eggs))
-        print(eggs1)
-
-    def say_word(self):
-        word = "Га-га"
-        print(word)
+    def __init__(self, name, fed, weight, eggs, word="Га-га"):
+        super().__init__(name, fed, weight, eggs, word)
 
 
 grey = gooses("Серый", "покормили", 3, 4)
@@ -55,24 +59,13 @@ white = gooses("Белый", "покормили", 2, 5)
 white.data()
 white.say_word()
 white.collected_eggs()
+print("----------------------------------------------------------------------")
 
 
 class chicken(birds):
 
-    def __init__(self, name, fed, weight, eggs):
-        super().__init__(name, fed, weight, eggs)
-
-    def data(self):
-        description = ("Курица - " + self.name + " весит: " + str(self.weight) + " кг " + "и её " + self.fed)
-        print(description)
-
-    def collected_eggs(self):
-        eggs1 = ("Собранные яйца с: " + ' курицы ' + self.name + " : " + str(self.eggs))
-        print(eggs1)
-
-    def say_word(self):
-        word = "Ко-ко-ко"
-        print(word)
+    def __init__(self, name, fed, weight, eggs, word="Ко-ко-ко"):
+        super().__init__(name, fed, weight, eggs, word)
 
 
 chicken1 = chicken("'Ко-ко'", "покормили", 1, 6)
@@ -91,100 +84,72 @@ print("----------------------------------------------------------------------")
 
 class ducks(birds):
 
-    def __init__(self, name, fed, weight, eggs):
-        super().__init__(name, fed, weight, eggs)
-
-    def data(self):
-        description = ("Утка - " + self.name + " весит: " + str(self.weight) + " кг " + "и его " + self.fed)
-        print(description)
-
-    def collected_eggs(self):
-        eggs1 = ("Собранные яйца с: " + " утки " + self.name + " : " + str(self.eggs))
-        print(eggs1)
-
-    def say_word(self):
-        word = "Кря-кря"
-        print(word)
+    def __init__(self, name, fed, weight, eggs, word):
+        super().__init__(name, fed, weight, eggs, word)
 
 
-duck = ducks("'Кряква'", "покормили", 1, 3)
+duck = ducks("'Кряква'", "покормили", 1, 3, "Кря-кря")
 duck.data()
 duck.say_word()
 duck.collected_eggs()
 print("----------------------------------------------------------------------")
 
+
 class mimmals(animals):
-    def __init__(self, name, fed, weight):
-        super().__init__(name, fed, weight)
-        self.fed = fed
-        self.name = name
+    def __init__(self, name, fed, weight, word):
+        super().__init__(name, fed, weight, word)
 
 
 class cow_and_goat(mimmals):
-    def __index__(self, name, fed, weight):
-        super().__init__(self, name, fed)
+    def __index__(self, name, fed, weight, word):
+        super().__init__(self, name, fed, word)
 
-
-class cow(cow_and_goat):
-    def __init__(self, name, fed, weight, milk):
-        super().__init__(name, fed, weight)
-        self.milk = milk
-
-    def data_cow(self):
-        description = ("Корова - " + self.name + " весит: " + str(self.weight) + " кг " + "и его " + self.fed)
+    def data_cow_goat(self):
+        description = (self.name + " весит: " + str(self.weight) + " кг " + "и его " + self.fed)
         print(description)
 
     def get_milk(self):
-        milk_1 = ("Собранное молоко с " + " коровы " + self.name + " : " + str(self.milk) + " литров")
+        milk_1 = ("Собранное молоко с " + self.name + " : " + str(self.milk) + " литров")
         print(milk_1)
 
-    def say_word(self):
-        word = "Муу-у"
-        print(word)
+
+class cow(cow_and_goat):
+    def __init__(self, name, fed, weight, milk, word="Мууу"):
+        super().__init__(name, fed, weight, word)
+        self.milk = milk
 
 
 cow = cow("Манька", "покормили", 400, 16)
-cow.data_cow()
+cow.data_cow_goat()
 cow.say_word()
 cow.get_milk()
+print("----------------------------------------------------------------------")
 
 
 class goat(cow_and_goat):
 
-    def __init__(self, name, fed, weight, milk):
-        super().__init__(name, fed, weight)
+    def __init__(self, name, fed, weight, milk, word="Ме-е-е"):
+        super().__init__(name, fed, weight, word)
         self.milk = milk
-
-    def data_goat(self):
-        description = ("Коза - " + self.name + " весит: " + str(self.weight) + " кг " + "и его " + self.fed)
-        print(description)
-
-    def get_milk_goat(self):
-        milk_1 = ("Собранное молоко с " + " козы " + self.name + " : " + str(self.milk) + " литров")
-        print(milk_1)
-
-    def say_word(self):
-        word = "Ме-е-е"
-        print(word)
 
 
 goat_horn = goat("Рога", "покормили", 70, 6)
-goat_horn.data_goat()
+goat_horn.data_cow_goat()
 goat_horn.say_word()
-goat_horn.get_milk_goat()
+goat_horn.get_milk()
 
 
 goat_hoof = goat("Копыта", "покормили", 60, 4)
-goat_hoof.data_goat()
+goat_hoof.data_cow_goat()
 goat_hoof.say_word()
-goat_hoof.get_milk_goat()
+goat_hoof.get_milk()
 goat_horn.compare_weight(goat_hoof)
 print("----------------------------------------------------------------------")
 
 
 class sheep(mimmals):
-    def __init__(self, name, fed, weight, woof):
-        super().__init__(name, fed, weight)
+    def __init__(self, name, fed, weight, woof, word="Ме-е-е"):
+        super().__init__(name, fed, weight, word)
         self.woof = woof
 
     def data_sheep(self):
@@ -194,10 +159,6 @@ class sheep(mimmals):
     def get_woof_sheep(self):
         milk_1 = ("Собранное шерсти с " + " овцы " + self.name + " : " + str(self.woof) + " литров")
         print(milk_1)
-
-    def say_word(self):
-        word = "Ме-е-е"
-        print(word)
 
 
 sheep_sheepy = sheep("Барашек", "покормили", 30, 1)
@@ -210,4 +171,4 @@ sheep_waivy.data_sheep()
 sheep_waivy.get_woof_sheep()
 sheep_waivy.say_word()
 sheep_sheepy.compare_weight(sheep_waivy)
-
+print("----------------------------------------------------------------------")

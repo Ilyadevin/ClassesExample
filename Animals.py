@@ -153,11 +153,11 @@ class sheep(mimmals):
         self.woof = woof
 
     def data_sheep(self):
-        description = ("Овца - " + self.name + " весит: " + str(self.weight) + " кг " + "и его " + self.fed)
+        description = (self.name + " весит: " + str(self.weight) + " кг " + "и его " + self.fed)
         print(description)
 
     def get_woof_sheep(self):
-        milk_1 = ("Собранное шерсти с " + " овцы " + self.name + " : " + str(self.woof) + " литров")
+        milk_1 = ("Собранное шерсти с " + self.name + " : " + str(self.woof) + " литров")
         print(milk_1)
 
 

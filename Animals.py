@@ -4,14 +4,13 @@ class animals:
         self.name = name
         self.weight = weight
         self.fed = fed
-        weight_dict = {}
+        self.weight_dict = {}
         self.word = word
 
-    def weight_(self, weight_dict=None):
-        for key, value in weight_dict:
-            key = self.name
-            value = self.weight
-            weight_dict[key] = value
+    def weight_(self):
+        key = self.name
+        value = self.weight
+        self.weight_dict[key] = value
 
     def compare_weight(self, other):
         total_weight = int(self.weight) + int(other.weight)
